@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<h1>CrystalWiki - Issue Board</h1>
+<div class="issue-board-description"></div>
+	<p class="home-text">Welcome to the CrystalWiki Issue Board. This board is designed to help you organize, track, correct, and maintain customer orders from our online crystal shop. The board is divided into three columns: Open, In Progress, and Completed.</p>
+
+	<div class="issue-column">
+		<h2>Open</h2>
+		<p class="home-text">This column contains all new issues that have been reported by customers. These issues can include problems with orders, such as incorrect shipping or billing addresses, phone numbers, or other minor issues.</p>
+	</div>
+
+	<div class="issue-column">
+		<h2>In Progress</h2>
+		<p class="home-text">Once an issue is being addressed by our customer service team, it is moved to the In Progress column. This helps us keep track of which issues are currently being worked on and ensures that nothing falls through the cracks.</p>
+	</div>
+
+	<div class="issue-column">
+		<h2>Completed</h2>
+		<p class="home-text">When an issue has been resolved, it is moved to the Completed column. This allows us to maintain a record of everything that has been addressed and ensures that we have a history of all customer interactions.</p>
+	</div>
+
+	<p class="home-text">If you are experiencing an issue with an order you placed, or if you need to get in touch with our customer service team about a minor issue, you can add an issue to the board by clicking the "Add Issue" button. Please provide as much detail as possible so that we can assist you promptly.</p>
+</div>
+{% endblock content %}

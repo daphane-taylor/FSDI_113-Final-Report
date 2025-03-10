@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}Issues{% endblock title %}
+
+{% block content %}
+<h1 class="mb-4">Issues</h1>
+
+<div class="d-flex justify-content-end mb-3">
+<a href="{% url 'issue_new' %}" class="btn btn-success">New Issue</a>
+</div>
+
+<div class="row">
+<!-- New Issues Column -->
+<div class="col-md-4">
+    <div class="card">
+    <div class="card-header text-dark">
+        <h5 class="mb-0">Open</h5>
+    </div>
+    <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+        {% for issue in issues %}
+        {% if issue.status.name == 'Open' %}
+            <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{% url 'issue_detail' issue.pk %}">{{ issue.name }}</a>
+                <div class="btn-group btn-group-sm">
+                <a href="{% url 'issue_edit' issue.pk %}" class="btn btn-outline-primary">Edit</a>
+                <a href="{% url 'issue_delete' issue.pk %}" class="btn btn-outline-danger">Delete</a>
+                </div>
+            </div>
+            <p class="mb-1 text-alert small">{{ issue.priority.name }}</p>
+            <p class="mb-1 text-muted small">{{ issue.summary }}</p>
+            <div class="d-flex justify-content-between">
+                <small>Assignee: {{ issue.reporter }}</small>
+                <small>Reporter: {{ issue.assignee|default:"Unassigned" }}</small>
+            </div>
+            </li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+        <hr />
+    </div>
+    </div>
+</div>
+
+<!-- In Progress Issues Column -->
+<div class="col-md-4">
+    <div class="card">
+    <div class="card-header text-dark">
+        <h5 class="mb-0">In Progress</h5>
+    </div>
+    <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+        {% for issue in issues %}
+        {% if issue.status.name == 'In Progress' %}
+            <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{% url 'issue_detail' issue.pk %}">{{ issue.name }}</a>
+                <div class="btn-group btn-group-sm">
+                <a href="{% url 'issue_edit' issue.pk %}" class="btn btn-outline-primary">Edit</a>
+                <a href="{% url 'issue_delete' issue.pk %}" class="btn btn-outline-danger">Delete</a>
+                </div>
+            </div>
+            <p class="mb-1 text-muted small">{{ issue.summary }}</p>
+            <div class="d-flex justify-content-between">
+                <small>Assignee: {{ issue.reporter }}</small>
+                <small>Reporter: {{ issue.assignee|default:"Unassigned" }}</small>
+            </div>
+            </li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+        <hr />
+    </div>
+    </div>
+</div>
+
+<!-- Completed Issues Column -->
+<div class="col-md-4">
+    <div class="card">
+    <div class="card-header text-dark">
+        <h5 class="mb-0">Completed</h5>
+    </div>
+    <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+        {% for issue in issues %}
+        {% if issue.status.name == 'Completed' %}
+            <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{% url 'issue_detail' issue.pk %}">{{ issue.name }}</a>
+                <div class="btn-group btn-group-sm">
+                <a href="{% url 'issue_edit' issue.pk %}" class="btn btn-outline-primary">Edit</a>
+                <a href="{% url 'issue_delete' issue.pk %}" class="btn btn-outline-danger">Delete</a>
+                </div>
+            </div>
+            <p class="mb-1 text-muted small">{{ issue.summary }}</p>
+            <div class="d-flex justify-content-between">
+                <small>Assignee: {{ issue.reporter }}</small>
+                <small>Reporter: {{ issue.assignee|default:"Unassigned" }}</small>
+            </div>
+            </li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+        <hr />
+    </div>
+    </div>
+</div>
+</div>
+
+<!-- Empty state message -->
+{% if not issues %}
+<div class="alert alert-info mt-3">
+<p class="mb-0">No issues yet. Click "New Issue" to create one.</p>
+</div>
+{% endif %}
+
+{% endblock content %}
